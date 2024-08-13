@@ -1,5 +1,6 @@
 <script>
     export let src;
+	export let curtainRaiser;
     import { createEventDispatcher } from 'svelte';
 
 	import { base } from '$app/paths';
@@ -30,6 +31,24 @@
     }
 </script>
 
+{#if curtainRaiser}
+<div class="player">
+    <audio
+        src = {src}
+        bind:currentTime={time}
+        bind:duration
+        bind:paused
+        preload="metadata"
+        on:play={() => dispatch('play')}
+        on:pause={() => dispatch('pause')}
+        on:ended={() => {
+            time = 0;
+            dispatch('ended');
+        }}
+    ></audio>
+    <button class="play" aria-label={paused ? 'play' : 'pause'} on:click={togglePlay}></button>
+</div>
+{:else}
 <div class="player">
     <audio
         src = {base + src}
@@ -46,6 +65,7 @@
     ></audio>
     <button class="play" aria-label={paused ? 'play' : 'pause'} on:click={togglePlay}></button>
 </div>
+{/if}
 
 
 <style>

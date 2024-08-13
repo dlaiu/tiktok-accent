@@ -1,87 +1,97 @@
 <script>
-    import { onMount } from "svelte";
-    import * as d3 from "d3";
-    // import data from '../data/7366018710248672517_pitch_values.json';
-    export let data;
-    export let fillColor;
+	import { onMount } from 'svelte';
+	import * as d3 from 'd3';
+	import { tweened } from 'svelte/motion';
+	import { cubicOut } from 'svelte/easing';
 
-    let svg_width;
-    let svg_height = 80;
+	export let data;
+	export let fillColor;
+	export let currentTime;
 
-    let margins = {top: 20, bottom: 20, left:20, right:20}
+	let svg_width;
+	let svg_height = 80;
 
-    //chart dimensions 
-	$: chartWidth = svg_width - margins.left - margins.right
-	$: chartHeight = svg_height - margins.top - margins.bottom
+	let margins = { top: 20, bottom: 20, left: 20, right: 20 };
 
-  
-    let midpoints = [];
-  
-    function findUptalkMidpoints(data) {
-      let start = null;
-  
-      data.forEach((d, i) => {
-        if (d.rise_point === 1) {
-          start = d.time;
-        } else if (start !== null && d.peak_point === 1) {
-          let midpoint = (start + d.time) / 2;
-          midpoints.push(midpoint);
-          start = null; // Reset start for the next potential uptalk
-        }
-      });
+	//chart dimensions
+	$: chartWidth = svg_width - margins.left - margins.right;
+	$: chartHeight = svg_height - margins.top - margins.bottom;
 
-      console.log(midpoints);
+	let midpoints = [];
+	let activeIndex = -1;
+
+    let time = data.map((d) => d.time)
+    let maxTime = d3.max(time);
+
+	function findUptalkMidpoints(data) {
+		let start = null;
+
+		data.forEach((d, i) => {
+			if (d.rise_point === 1) {
+				start = d.time;
+			} else if (start !== null && d.peak_point === 1) {
+				let midpoint = (start + d.time) / 2;
+				midpoints.push(midpoint);
+				start = null; // Reset start for the next potential uptalk
+			}
+		});
+
+		console.log(midpoints);
+	}
+
+	$: xScale = d3
+		.scaleLinear()
+		.domain([0, maxTime])
+		.range([0, chartWidth]);
+
+	// Update activeIndex based on currentTime
+	$: {
+		activeIndex = midpoints.findIndex((midpoint) => Math.abs(midpoint - currentTime) < 0.05);
+	}
+
+	// let cy = tweened(chartHeight / 2, { duration: 200, easing: cubicOut });
+	// let radius = tweened(5, { duration: 200, easing: cubicOut });
+	// let color = tweened(fillColor || '#000000', { duration: 200, easing: cubicOut });
+
+	// $: {
+	// 	if (activeIndex !== -1) {
+	// 		cy.set(chartHeight / 2 - 20);
+	// 		radius.set(10);
+	// 		color.set('red');
+	// 	} else {
+	// 		cy.set(chartHeight / 2);
+	// 		radius.set(5);
+	// 		color.set(fillColor || '#000000');
+	// 	}
+	// }
+
+	onMount(() => {
+		findUptalkMidpoints(data);
+	});
+</script>
+
+<div class="chart-space" bind:clientWidth={svg_width}>
+	<svg id="chart" width={svg_width} height={svg_height}>
+		<g class="chart" transform="translate({margins.left}, {margins.top})">
+			{#each midpoints as midpoint, i}
+				<circle 
+                    cx={xScale(midpoint)} 
+                    cy={Math.abs(midpoint - currentTime) < 0.05 ? chartHeight / 2 - 20 : chartHeight / 2}
+                    r={Math.abs(midpoint - currentTime) < 0.05 ? 10 : 5}
+                    fill={Math.abs(midpoint - currentTime) < 0.05 ? "red" : fillColor || "#000000"}
+                    style="transition: all 0.2s ease-out;"
+                />
+			{/each}
+		</g>
+	</svg>
+</div>
+
+<style>
+	.chart-space {
+		background: lemonchiffon;
+	}
+
+    circle {
+        transition: all 0.2s ease-out;
     }
-
-    $: xScale = d3.scaleLinear().domain([0, d3.max(midpoints)]).range([0, chartWidth]);
-
-  
-    onMount(() => {
-      findUptalkMidpoints(data);
-    //   drawChart();
-    });
-  
-    // function drawChart() {
-    // //   const width = 800;
-    // //   const height = 400;
-  
-    //   const svg = d3
-    //     .select("#chart")
-    //     .append("svg")
-    //     .attr("width", width)
-    //     .attr("height", height);
-  
-    //   const xScale = d3
-    //     .scaleLinear()
-    //     .domain([0, d3.max(midpoints)])
-    //     .range([0, width]);
-  
-    //   svg
-    //     .selectAll("circle")
-    //     .data(midpoints)
-    //     .enter()
-    //     .append("circle")
-    //     .attr("cx", d => xScale(d))
-    //     .attr("cy", height / 2)
-    //     .attr("r", 5)
-    //     .attr("fill", {fillColor});
-    // }
-  </script>
-  
-  <!-- <div id="chart"></div> -->
-
-  <div class="chart-space" bind:clientWidth = {svg_width}>
-        <svg id="chart" width={svg_width} height={svg_height}>
-            <g class = 'chart' transform = 'translate({margins.left}, {margins.top})'>
-            {#each midpoints as midpoint}
-                <circle cx={xScale(midpoint)} cy={chartHeight / 2} r="5" fill="#000000" />
-            {/each}
-            </g>
-        </svg>
-  </div>
-  
-  <style>
-    .chart-space {
-        background: lemonchiffon;
-    }
-  </style>
+</style>

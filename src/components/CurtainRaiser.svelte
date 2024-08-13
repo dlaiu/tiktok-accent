@@ -1,4 +1,5 @@
 <script>
+	import { base } from '$app/paths';
 	import { Client } from '@gradio/client';
 	import { onMount } from 'svelte';
 	import WaveForm from './WaveForm.svelte';
@@ -24,11 +25,13 @@
 	let audio = null;
 	let recording = false;
 	let comparisonSection;
+	let currentTime = 0; // Track the current time of the audio
+	let anyaTime = 0; // Current time for Anya's audio
 
 	// Call this function when CurtainRaiser is done
 	function finishCurtainRaiser() {
         dispatch('finished');
-		console.log("triggered")
+		// console.log("triggered")
     }
 
 	async function startRecording() {
@@ -65,7 +68,9 @@
 			// 			audioBlob,
 			// 			audioUrl
 			// 		};
-			console.log(recordData);
+			// console.log(recordData);
+			console.log(audioUrl);
+			console.log(audioBlob);
 		});
 
 		// document.getElementById('recordButton').innerText = 'Record Audio';
@@ -116,6 +121,14 @@
 		console.log(audio);
 
 	}
+
+	function handleTimeUpdate(event) {
+		currentTime = event.detail.currentTime; // Update current time
+	}
+
+	function handleAnyaTimeUpdate(event) {
+    	anyaTime = event.detail.currentTime;
+  	}
 </script>
 
 <section>
@@ -141,14 +154,14 @@
 
 			<div class="hearIt">
 				<p>You:</p>
-				<AudioPlayer src={audioUrl} />
-				<MidPointCharts data={recordData} fillColor="red" />
+				<AudioPlayer src={audioUrl} curtainRaiser=True on:timeUpdate={handleTimeUpdate} />
+				<MidPointCharts data={recordData} fillColor="black" currentTime={currentTime}/>
 			</div>
 			<hr width="80%" />
 			<div class="hearIt">
 				<p>Anya:</p>
-				<AudioPlayer src="/media/audio/7007951477993966853_trimmed.mp3" />
-				<MidPointCharts data={anyaData} fillColor="red" />
+				<AudioPlayer src="/media/audio/7007951477993966853_trimmed.mp3" on:timeUpdate={handleAnyaTimeUpdate} />
+				<MidPointCharts data={anyaData} fillColor="black" currentTime={anyaTime} />
 			</div>
 
 			<p class="content">What do you think is the difference here?</p>
@@ -215,7 +228,7 @@
 	}
 
 	[aria-label='record'] {
-		background-image: url(component_assets/record.svg);
+		background-image: url(/component_assets/record.svg);
 	}
 
 	[aria-label='pending'] {
