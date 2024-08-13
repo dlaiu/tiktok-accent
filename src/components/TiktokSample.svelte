@@ -2,11 +2,15 @@
     import WaveForm from './WaveForm.svelte';
     import AudioPlayer from './AudioPlayer.svelte';
 
+    import { base } from '$app/paths';
+
     export let src;
     export let tiktok_src;
     export let data;
     export let transcription;
     export let caption;
+
+    // console.log(src);
 
     let videoElement;
     let currentTime = 0;
@@ -38,13 +42,14 @@
     }).join(' ');
 
     $: formattedCaption = `<p>${captionHTML}</p>`;
+    
 </script>
 
 
 <div class="tiktokSample">
     <video 
         id="tiktok-placeholder" 
-        src="{tiktok_src}" 
+        src="{base + tiktok_src}" 
         bind:this={videoElement}
         on:play={handlePlay}
         on:pause={handlePause}

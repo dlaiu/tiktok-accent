@@ -1,0 +1,11 @@
+<svg id="pending-dots" width="80" height="40" viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg" fill="#000">
+  <circle cx="15" cy="25" r="10">
+    <animate attributeName="cy" begin="0s" dur="0.6s" values="25;15;25" calcMode="linear" repeatCount="indefinite" />
+  </circle>
+  <circle cx="60" cy="25" r="10">
+    <animate attributeName="cy" begin="0.2s" dur="0.6s" values="25;15;25" calcMode="linear" repeatCount="indefinite" />
+  </circle>
+  <circle cx="105" cy="25" r="10">
+    <animate attributeName="cy" begin="0.4s" dur="0.6s" values="25;15;25" calcMode="linear" repeatCount="indefinite" />
+  </circle>
+</svg>

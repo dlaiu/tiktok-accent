@@ -1,4 +1,6 @@
 <script>
+    import { base } from '$app/paths';
+
 	import WaveForm from "./WaveForm.svelte";
     import data from "../data/7366018710248672517_pitch_values.json"
 	import AudioPlayer from "./AudioPlayer.svelte";
@@ -9,10 +11,23 @@
 
     import transcript from '../data/7366018710248672517_transcription.json'
 	import WaveFormPlayer from "./WaveFormPlayer.svelte";
+	import CurtainRaiser from './CurtainRaiser.svelte';
+    
+    let curtainRaiserDone = false;
+
+    function handleCurtainRaiserFinished() {
+        curtainRaiserDone = true;
+        console.log("curtain raiser is done.")
+    }
+
 
 </script>
 <body>
-    <div class="content">
+    <div class="curtainRaiser">
+        <CurtainRaiser on:finished={handleCurtainRaiserFinished}/>
+    </div>
+
+    <!-- <div class="content">
         <p>This is what the clip sounds like:</p>
     </div>
     <TiktokSample 
@@ -24,7 +39,13 @@
     />
     <div class="content">
         <p>What do you notice?</p>
-    </div> 
+    </div>  -->
+    
+    {#if curtainRaiserDone}
+    <div class="hero">
+        <p class="headline">Why are people online talking differently?</p>
+        <p class="byline">By Darryl Laiu</p>
+    </div>
 
     <Scrolly_1 />
 
@@ -82,7 +103,7 @@
         <div class="sound-close-reading">
             <div class="player">
                 <AudioPlayer src='/media/audio/7366018710248672517.mp3' />
-                <!-- <p class="caption">"“These are the top 10 things you must have from Amazon this summer.”"</p> -->
+                <p class="caption">"“These are the top 10 things you must have from Amazon this summer.”"</p>
             </div>
             <div class="waveform-close-reading">
                 <WaveFormAnnotated data={data} />
@@ -97,7 +118,7 @@
         <p>In their study, they found that rises were associated with feelings of helpfulness, niceness, and friendliness towards the speaker. </p>
         <p>The speaker also comes across as more prepared about what they are saying, and the speaker that used “rises” was heard as “informing” and “instructive”.</p>
     </div>
-
+    {/if}
 
 </body>
 
@@ -108,8 +129,8 @@
         justify-content: center;
         font-family: 'Inter-Tight', sans-serif;
         font-style: normal;
-        font-size: 1em;
-        line-height: 1.5;
+        /* font-size: 1em; */
+        /* line-height: 1.5; */
         margin: 0;
         padding: 0;
     }
@@ -127,13 +148,42 @@
         text-align: left;
     }
 
+    .hero {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+    }
+
+    .headline {
+        font-size: 4em;
+        font-weight: bold;
+        font-family: 'Rasa', serif;
+
+    }
+
+    .byline {
+        font-size: 1.5em;
+        font-family: 'Rasa', serif;
+    }
+
     .content p {
         margin: 0.5em 0;
+        font-size: 1.2em;
+        line-height: 1.5;
     }
 
     .bold {
         font-weight: bold;
     }
+
+    /* .curtainRaiser {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    } */
 
     .tiktok-quote {
         display: flex;

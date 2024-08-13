@@ -6,7 +6,7 @@
     export let x;
     export let y;
 
-    console.log(stats);
+    // console.log(stats);
   
     const lineGenerator = d3.line()
       .curve(d3.curveBasis)

@@ -2,6 +2,8 @@
     export let src;
     import { createEventDispatcher } from 'svelte';
 
+	import { base } from '$app/paths';
+
     const dispatch = createEventDispatcher();
 
     let time = 0;
@@ -30,7 +32,7 @@
 
 <div class="player">
     <audio
-        {src}
+        src = {base + src}
         bind:currentTime={time}
         bind:duration
         bind:paused

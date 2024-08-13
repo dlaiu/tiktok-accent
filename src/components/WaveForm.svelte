@@ -6,6 +6,18 @@
     import * as d3 from 'd3';
 
     import Line from './Line.svelte';
+	import { onMount } from 'svelte';
+
+	export let playhead;
+
+	// onMount(() => {
+	// 	console.log(playhead)
+	// })
+	
+	if (playhead === undefined) {
+		playhead = true;
+	}
+
 
     let svg_width;
 	let svg_height = 300;
@@ -41,7 +53,6 @@
 
 	// Calculate playhead position based on current time
 	$: playheadPosition = xScale(currentTime);
-	
 
 </script>
 
@@ -50,10 +61,16 @@
 		<g class = 'chart' transform = 'translate({margins.left}, {margins.top})'>
 			<Line stats={data} {xAccessorScaled} {yAccessorScaled} />
 			<!-- Playhead line -->
-            <line x1={playheadPosition} x2={playheadPosition} y1={0} y2={chartHeight} stroke="red" stroke-width="2" />
+			 {#if playhead === true}
+            	<line x1={playheadPosition} x2={playheadPosition} y1={0} y2={chartHeight} stroke="red" stroke-width="2" />
+			{/if}
 		</g>
 	</svg>
 </div>
+
+<!-- {#if audio}
+	<button class="play" aria-label={paused ? 'play' : 'pause'} on:click={audio.play()}></button>
+{/if} -->
 
 <style>
 	.chart-space {
