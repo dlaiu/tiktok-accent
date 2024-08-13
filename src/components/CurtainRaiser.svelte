@@ -13,6 +13,7 @@
 	import anyaData from '../data/7007951477993966853_trimmed_pitch-values.json';
 
 	import { createEventDispatcher } from 'svelte';
+	import WaveFormCircles from './WaveFormCircles.svelte';
 
 	const dispatch = createEventDispatcher();
 
@@ -155,13 +156,15 @@
 			<div class="hearIt">
 				<p>You:</p>
 				<AudioPlayer src={audioUrl} curtainRaiser=True on:timeUpdate={handleTimeUpdate} />
-				<MidPointCharts data={recordData} fillColor="black" currentTime={currentTime}/>
+				<!-- <MidPointCharts data={recordData} fillColor="black" currentTime={currentTime}/> -->
+				<WaveFormCircles data={recordData} currentTime={currentTime} fillColor="black" />
 			</div>
 			<hr width="80%" />
 			<div class="hearIt">
 				<p>Anya:</p>
 				<AudioPlayer src="/media/audio/7007951477993966853_trimmed.mp3" on:timeUpdate={handleAnyaTimeUpdate} />
-				<MidPointCharts data={anyaData} fillColor="black" currentTime={anyaTime} />
+				<!-- <MidPointCharts data={anyaData} fillColor="black" currentTime={anyaTime} /> -->
+				 <WaveFormCircles data={anyaData} currentTime={anyaTime} fillColor="black" />
 			</div>
 
 			<p class="content">What do you think is the difference here?</p>
@@ -261,4 +264,11 @@
 		justify-content: center;
 		align-items: center;
 	}
+	
+	.chart-overlay {
+		position: relative;
+		width: 100%; /* Adjust based on your desired width */
+		height: 100%; /* Adjust based on your desired height */
+	}
+
 </style>

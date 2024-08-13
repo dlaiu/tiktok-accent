@@ -3,7 +3,7 @@
 	import * as d3 from 'd3';
 	import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
-    import WaveForm from './WaveForm.svelte';
+    import Line from './Line.svelte';
 
 	export let data;
 	export let fillColor;
@@ -14,16 +14,35 @@
 
 	let margins = { top: 20, bottom: 20, left: 20, right: 20 };
 
-	//chart dimensions
+	// chart dimensions
 	$: chartWidth = svg_width - margins.left - margins.right;
 	$: chartHeight = svg_height - margins.top - margins.bottom;
 
 	let midpoints = [];
 	let activeIndex = -1;
 
-    let time = data.map((d) => d.time)
-    let maxTime = d3.max(time);
+    let time = data.map((d) => d.time);
+    let pitch = data.map((d) => d.pitch);
 
+	let maxTime = d3.max(time);
+	let maxPitch = d3.max(pitch);
+    let minPitch = d3.min(pitch);
+
+	// Scales
+	$: xScale = d3.scaleLinear().domain([0, maxTime]).range([0, chartWidth]);
+	$: yScale = d3.scaleLinear().domain([minPitch, maxPitch]).range([chartHeight, 0]);
+
+	// Accessors
+	const xAccessor = d => d.time;
+	const yAccessor = d => d.pitch;
+
+	$: xAccessorScaled = d => xScale(xAccessor(d));
+	$: yAccessorScaled = d => yScale(yAccessor(d));
+
+	// Calculate playhead position based on current time
+	$: playheadPosition = xScale(currentTime);
+
+	// Function to find uptalk midpoints
 	function findUptalkMidpoints(data) {
 		let start = null;
 
@@ -40,31 +59,10 @@
 		console.log(midpoints);
 	}
 
-	$: xScale = d3
-		.scaleLinear()
-		.domain([0, maxTime])
-		.range([0, chartWidth]);
-
 	// Update activeIndex based on currentTime
 	$: {
 		activeIndex = midpoints.findIndex((midpoint) => Math.abs(midpoint - currentTime) < 0.05);
 	}
-
-	// let cy = tweened(chartHeight / 2, { duration: 200, easing: cubicOut });
-	// let radius = tweened(5, { duration: 200, easing: cubicOut });
-	// let color = tweened(fillColor || '#000000', { duration: 200, easing: cubicOut });
-
-	// $: {
-	// 	if (activeIndex !== -1) {
-	// 		cy.set(chartHeight / 2 - 20);
-	// 		radius.set(10);
-	// 		color.set('red');
-	// 	} else {
-	// 		cy.set(chartHeight / 2);
-	// 		radius.set(5);
-	// 		color.set(fillColor || '#000000');
-	// 	}
-	// }
 
 	onMount(() => {
 		findUptalkMidpoints(data);
@@ -74,7 +72,10 @@
 <div class="chart-space" bind:clientWidth={svg_width}>
 	<svg id="chart" width={svg_width} height={svg_height}>
 		<g class="chart" transform="translate({margins.left}, {margins.top})">
-            <!-- <WaveForm data={data} playhead="False" /> -->
+            <!-- Draw the waveform line -->
+            <Line stats={data} {xAccessorScaled} {yAccessorScaled} />
+
+            <!-- Draw the midpoint circles -->
 			{#each midpoints as midpoint, i}
 				<circle 
                     cx={xScale(midpoint)} 
@@ -84,6 +85,9 @@
                     style="transition: all 0.2s ease-out;"
                 />
 			{/each}
+
+            <!-- Draw the playhead line -->
+            <line x1={playheadPosition} x2={playheadPosition} y1={0} y2={chartHeight} stroke="red" stroke-width="2" />
 		</g>
 	</svg>
 </div>
