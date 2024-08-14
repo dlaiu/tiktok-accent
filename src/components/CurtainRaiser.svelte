@@ -26,6 +26,7 @@
 	let audio = null;
 	let recording = false;
 	let clicked = false;
+	let disabled = false; // New state for disabling the button
 
 	let comparisonSection;
 	let currentTime = 0; // Track the current time of the audio
@@ -80,6 +81,7 @@
 		// document.getElementById('recordButton').innerText = 'Record Audio';
 		recording = false;
 		clicked = false; // Reset clicked state when recording stops
+		disabled = true; // Disable the button after recording stops
 	}
 
 	function toggleRecording() {
@@ -150,6 +152,7 @@
 			aria-label={!recording ? 'record' : 'recording-active'}
 			class:clicked={clicked}
 			class:active={recording}
+			disabled={disabled}
 			on:click={toggleRecording}
 			on:mouseenter={() => (hovered = true)}
 			on:mouseleave={() => (hovered = false)}
@@ -286,6 +289,15 @@
 		background-image: url(/component_assets/pending.svg);
 		box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2);
 		transform: scale(0.98); /* Slightly shrink to simulate pressing */
+	}
+
+	/* Disabled Button State */
+	button.disabled {
+		background-color: #d3d3d3; /* Greyed out color */
+		cursor: not-allowed;
+		transform: none;
+		box-shadow: none;
+		opacity: 0.6;
 	}
 
 	.caption {
