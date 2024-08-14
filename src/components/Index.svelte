@@ -110,7 +110,7 @@
 
         <p>Bumagin says that she does intentionally speak in a lower voice. However, she said that she doesn't uptalk intentionally.</p>
 
-        <p>"I think it's natural...in that context to emphasise certain things."</p>
+        <p>"I think it's natural...in that context to emphasize certain things."</p>
 
         <p class="subhead" style="font-size: 2em;font-weight: bold;font-family:'Rasa', 'serif';">Uptalk</p>
 
@@ -137,7 +137,7 @@
     <DensityChart />
 
     <div class="content">
-        <p>Consider this 15s clip,</p>
+        <p>Consider the same 15 second clip,</p>
 
         <div class="sound-close-reading">
             <WaveFormAnnotatedCircles data={data} currentTime={currentTimeAnnotated}/>
@@ -147,7 +147,7 @@
             </div>
         </div>
 
-        <p>we can see that words like "Amazon", the product introduced, and its features, are emphasised.</p>
+        <p>we can see that words like "Amazon", the product introduced, and its features, are emphasized.</p>
     </div>
 
     <div class="content">
@@ -156,9 +156,10 @@
         <p>In their study, they found that rises were associated with feelings of helpfulness, niceness, and friendliness towards the speaker. </p>
         <p>The speaker also comes across as more prepared about what they are saying, and the speaker that used “rises” was heard as “informing” and “instructive”.</p>
         <p class="subhead" style="font-size: 2em;font-weight: bold;font-family:'Rasa', 'serif';">Trends & Emulation</p>
+
         <p>Bumagin said that her intonations are just part of the natural way she speaks "to emphasize certain things".</p>
-        <p>In my conversation with her, I could hear those same intonations. However, they sounded more organic because they were peppered throughout sentences of varying pitch as opposed to grouped together, sentence after sentence.</p>
-        <p>Her manager, Andreea Ozturk, who was in the call with us, said that much like trends, these accents could have started as something fun that ends up being copied or emulated by other people.</p>
+        <p>In my conversation with her, I could hear those same intonations. However, they didn’t sound out of place because they were peppered throughout sentences of varying pitch as opposed to grouped together, sentence after sentence.</p>
+        <p>Her manager, Andreea Ozturk, who was on the call with us, said that much like trends, these accents could have started as something fun that ends up being copied or emulated by other people.</p>
         <p>"Let's say tomorrow, Anya creates a video...in a crazy, totally different way," said Ozturk. "Other creators may copy her [the way she did it]."</p> 
         <p>When I asked Bumagin about how she thinks she's different from other Amazon influencers, Bumagin said that despite everything we've talked about, she feels that everyone has a different voice.</p>
         <p>"Everyone has a different voice and a different way of speaking," said Bumagin. "Some followers might relate to one creator more [that the other because of] the way they speak as well."</p>

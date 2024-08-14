@@ -25,6 +25,8 @@
 	let audioUrl = null;
 	let audio = null;
 	let recording = false;
+	let clicked = false;
+
 	let comparisonSection;
 	let currentTime = 0; // Track the current time of the audio
 	let anyaTime = 0; // Current time for Anya's audio
@@ -45,6 +47,7 @@
 		recorder.startRecording();
 		// document.getElementById('recordButton').innerText = 'Stop Recording';
 		recording = true;
+		clicked = true;
 	}
 
 	async function stopRecording() {
@@ -75,6 +78,8 @@
 		});
 
 		// document.getElementById('recordButton').innerText = 'Record Audio';
+		recording = false;
+		clicked = false; // Reset clicked state when recording stops
 	}
 
 	function toggleRecording() {
@@ -142,8 +147,12 @@
 		</div>
 		<button
 			id="recordButton"
-			aria-label={!recording ? 'record' : 'pending'}
+			aria-label={!recording ? 'record' : 'recording-active'}
+			class:clicked={clicked}
+			class:active={recording}
 			on:click={toggleRecording}
+			on:mouseenter={() => (hovered = true)}
+			on:mouseleave={() => (hovered = false)}
 		></button>
 		<!-- <div class="button">
       
@@ -239,12 +248,44 @@
 		transition: background-image 0.3s ease-in-out;
 	}
 
-	[aria-label='record'] {
+	/* Default Record State */
+	button[aria-label='record'] {
 		background-image: url(/component_assets/record.svg);
 	}
 
-	[aria-label='pending'] {
+	/* Record Hover State */
+	button[aria-label='record']:hover {
+		background-image: url(/component_assets/record.svg);
+		/* Typical design choice for hover */
+		transform: scale(1.05);
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	}
+
+	/* Record Clicked Hover State */
+	button[aria-label='record'].clicked:hover {
+		background-image: url(/component_assets/record.svg);
+		box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2);
+		transform: scale(0.98); /* Slightly shrink to simulate pressing */
+	}
+
+	/* Recording Active State */
+	button[aria-label='recording-active'] {
 		background-image: url(/component_assets/pending.svg);
+		background-color: #FF6961; 
+	}
+
+	/* Recording Active Hover State */
+	button[aria-label='recording-active']:hover {
+		background-image: url(/component_assets/pending.svg);
+		transform: scale(1.05);
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	}
+
+	/* Recording Active Clicked Hover State */
+	button[aria-label='recording-active'].clicked:hover {
+		background-image: url(/component_assets/pending.svg);
+		box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2);
+		transform: scale(0.98); /* Slightly shrink to simulate pressing */
 	}
 
 	.caption {
