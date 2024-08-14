@@ -12,7 +12,7 @@ When I plotted the density chart, I found that the median number of intonations 
 I also wanted to see if there was a correlation between this metric and the view counts of these videos. I ran a regression model but found that there was a significant relationship between the two metrics.
 
 ## Recreating the analysis
-A santised version of the notebooks I used to analyse the data can be found in the code directory. A longer messier version that has all the notebooks I tried to work can be found here. 
+A santised version of the notebooks I used to analyse the data can be found in the code directory. A longer messier version that has all the notebooks I tried to work can be found [here](https://github.com/dlaiu/tiktok-accent-all-files). 
 
 I am grateful for Soma's help with scraping script "running_the_scraper". It is implemented in Playwright and looks for the undocumented API while you are manually scrolling or searching through TikTok. 
 
