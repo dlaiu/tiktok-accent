@@ -4,15 +4,19 @@
     let currentStep;
 
     let steps = [
-        "She's not the only one that sounds this way.",
-        "In an analysis of six Amazon content creators and over 1,500 videos, all of them had the audibly the same speech pattern.",
-        "When I first came across these videos, the speech sounded weirdly unnatural.",
-        "There was something distinct about the way these Amazon Influencers spoke, but I couldn’t quite put my finger on it. "
+        // "She's not the only one that sounds this way.",
+        "When we analysed 1,500 videos from Amazon content creators, all of them had the distinctive speech pattern.",
+        "Some, like myself, find this speech pattern weirdly unnatural.",
+        "Adam Aleksic — a content creator that makes videos about linguistics, might call it the “TikTok accent.”"
     ]
 </script>
 
 <section>
     <div class="spacer" />
+
+    <div class="content">
+        <p style="margin-bottom:40px;">Speaking this way seems to be a feature of how TikTokers market products online.</p>
+    </div>
     <div class="section-container">
             <div class="steps">
             <Scrolly bind:value={currentStep} >
@@ -106,7 +110,7 @@
 		text-align: center;
 		margin-left: 3%;
 		margin-right: 3%;
-        background-color: aquamarine;
+        /* background-color: aquamarine; */
 	}
 
 	.step-text{
@@ -114,9 +118,10 @@
 		margin:auto;
 		text-align: left;
 		padding: 20px;
-		border: 1px black solid;
+		/* border: 1px black solid; */
 		z-index:99;
-		background-color: white;
+		background-color: #ffeaa7;
+        font-size: 1.2em;
 	}
 	
 	.sticky{
@@ -132,6 +137,25 @@
 
     .spacer {
         height: 25vh;
+    }
+
+    .content {
+        /* font-family: 'Inter-Tight', sans-serif; */
+        /* font-size: 16px; */
+        /* line-height: 1.5; */
+        margin: auto;
+        width: 660px;
+        max-width: 660px;
+        padding: 0 20px;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .content p {
+        margin: 0.5em 0;
+        font-size: 1.2em;
+        line-height: 1.5;
     }
 
 </style>

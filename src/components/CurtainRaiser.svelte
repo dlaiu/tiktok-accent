@@ -130,13 +130,15 @@
 	function handleAnyaTimeUpdate(event) {
     	anyaTime = event.detail.currentTime;
   	}
+
+	let played = false;
 </script>
 
 <section>
 	<div class="curtainSection">
 		<div class="header">
-			<p>Let’s see if you sound like an influencer.</p>
-			<p>Record yourself reading this typical voiceover from an Amazon influencer.</p>
+			<p class="landing">Let’s see if you sound like an influencer.</p>
+			<p class="instructions">Record yourself reading this typical voiceover from an Amazon influencer.</p>
 		</div>
 		<button
 			id="recordButton"
@@ -151,23 +153,25 @@
 
 	{#if audioUrl}
 		<div class="comparison" bind:this={comparisonSection} transition:fly={{ y: 20, duration: 300, opacity: 0 }}>
-			<p class="content">Now let's hear how Amazon influencer Anya Bumag sounds reading it.</p>
+			<p class="content">Now let's hear how Amazon influencer <a href="https://www.tiktok.com/@anya.bumag?lang=en">anya.bumag</a> sounds reading it.</p>
 
 			<div class="hearIt">
-				<p>You:</p>
-				<AudioPlayer src={audioUrl} curtainRaiser=True on:timeUpdate={handleTimeUpdate} />
-				<!-- <MidPointCharts data={recordData} fillColor="black" currentTime={currentTime}/> -->
-				<WaveFormCircles data={recordData} currentTime={currentTime} fillColor="black" />
+				<p class="name">Anya:</p>
+				<AudioPlayer src="/media/audio/7007951477993966853_trimmed.mp3" on:timeUpdate={handleAnyaTimeUpdate} on:play={() => played = true}/>
+				<!-- <MidPointCharts data={anyaData} fillColor="black" currentTime={anyaTime} /> -->
+				 <WaveFormCircles data={anyaData} currentTime={anyaTime} fillColor="black" curtain={true} />
 			</div>
 			<hr width="80%" />
-			<div class="hearIt">
-				<p>Anya:</p>
-				<AudioPlayer src="/media/audio/7007951477993966853_trimmed.mp3" on:timeUpdate={handleAnyaTimeUpdate} />
-				<!-- <MidPointCharts data={anyaData} fillColor="black" currentTime={anyaTime} /> -->
-				 <WaveFormCircles data={anyaData} currentTime={anyaTime} fillColor="black" />
+			{#if played}
+			<div class="hearIt" transition:fly={{y: 20, duration: 600, opacity: 0}}>
+				<p class="name">You:</p>
+				<AudioPlayer src={audioUrl} curtainRaiser=True on:timeUpdate={handleTimeUpdate} />
+				<!-- <MidPointCharts data={recordData} fillColor="black" currentTime={currentTime}/> -->
+				<WaveFormCircles data={recordData} currentTime={currentTime} fillColor="black" curtain={true}/>
 			</div>
+			<p class="content">Notice anything different? As a hint, we've highlighted what makes Anya's voice different.</p>
+			{/if}
 
-			<p class="content">What do you think is the difference here?</p>
 		</div>
 	{/if}
 
@@ -240,7 +244,7 @@
 
 	.caption {
 		font-style: italic;
-		font-size: 0.9em;
+		font-size: 1.2em;
 		align-self: center;
 	}
 
@@ -256,7 +260,7 @@
 	}
 
 	.comparison {
-		transition: 0.3s ease-in-out;
+		
 		width: 100vw;
 		height: 80vh;
 		display: flex;
@@ -271,4 +275,28 @@
 		height: 100%; /* Adjust based on your desired height */
 	}
 
+	.header {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 1em;
+	}
+
+	.landing {
+		font-size: 3.5em;
+		font-weight: 600;
+		/* font-family: 'Inter', sans-serif; */
+	}
+
+	.instructions {
+		font-size: 1.5em;
+		font-weight: 400;
+		/* font-family: 'Inter', sans-serif; */
+	}
+
+	.name {
+		font-size: 1.5em;
+		font-weight: 600;
+	}
 </style>

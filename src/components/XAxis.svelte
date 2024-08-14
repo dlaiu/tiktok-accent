@@ -26,6 +26,6 @@
     stroke: #000;
   }
   .x-axis text {
-    font-size: 10px;
+    font-size: 2em;
   }
 </style>

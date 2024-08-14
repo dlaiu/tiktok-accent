@@ -47,16 +47,13 @@
 
 	let currentStep;
 
-	let steps = ['I sampled 100 videos across four genres of TikToks: Amazon Finds, Book Recommendations, Get Ready With Me, and Storytime.',
-        'I found that the number of intonations in Amazon Finds TikToks were statistically significantly more than other genres.', 
-        'On average, Amazon finds TikToks had a median of about 15 intonations per 15 seconds.']
+	let steps = ['When looking at 100 videos across four genres of TikToks: Amazon Finds, Book Recommendations, Get Ready With Me, and Storytime...',
+        '...the number of intonations in Amazon Finds TikToks were statistically significantly more than other genres.', 
+        'Typically, Amazon finds TikToks had a median of about 15 intonations per 15 seconds.']
 </script>
 
 <section>
     <div class="spacer" />
-    <div class="content">
-        <p>And it turns out they kind of are:</p>
-    </div>
     <div class="section-container">
         <div class="sticky">
             <div class="chart-space" bind:clientWidth={svg_width}>
@@ -145,9 +142,11 @@
 		margin:auto;
 		text-align: left;
 		padding: 20px;
-		border: 1px black solid;
+		/* border: 1px black solid; */
 		z-index:99;
-		background-color: white;
+		background-color: #ffeaa7;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		font-size: 1.2em;
 	}
 
     .sticky{

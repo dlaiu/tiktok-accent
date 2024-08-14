@@ -3,6 +3,7 @@
     import AudioPlayer from './AudioPlayer.svelte';
 
     import { base } from '$app/paths';
+	import WaveFormCircles from './WaveFormCircles.svelte';
 
     export let src;
     export let tiktok_src;
@@ -58,7 +59,8 @@
         muted
     />
     <div class="sound">
-        <WaveForm data={data} currentTime={currentTime} />
+        <!-- <WaveForm data={data} currentTime={currentTime} /> -->
+         <WaveFormCircles data={data} currentTime={currentTime} fillColor="black" svg_height=300/>
         <div class="player">
             <AudioPlayer 
                 src={src} 
@@ -102,6 +104,7 @@
         border-radius: 10px;
         max-width: 65vw;
         align-self: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
     
     .sound {

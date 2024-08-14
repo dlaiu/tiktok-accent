@@ -44,7 +44,7 @@
             <LineAnnotated stats={data} {xAccessorScaled} {yAccessorScaled} />
 
             <!-- Playhead line -->
-            <line x1={playheadPosition} x2={playheadPosition} y1={0} y2={chartHeight} stroke="red" stroke-width="2" />
+            <line x1={playheadPosition} x2={playheadPosition} y1={0} y2={chartHeight} stroke="#FF6961" stroke-width="2" />
         </g>
     </svg>
 </div>

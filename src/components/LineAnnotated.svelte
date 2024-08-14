@@ -38,14 +38,14 @@
     $: segments = getSegments(stats);
 
     function getColor(d) {
-        return 'red';
+        return '#FF6961';
     }
 </script>
 
 <path 
     class="line" 
     d={lineGenerator(stats.filter(d => !d.rise_point && !d.peak_point))} 
-    stroke="steelblue"
+    stroke="#545454"
 />
 
 {#each segments as segment}
@@ -60,7 +60,7 @@
 <style>
   .line {
     fill: none;
-    stroke-width: 2px;
+    stroke-width: 1.5px;
     stroke-linecap: round;
   }
 </style>
