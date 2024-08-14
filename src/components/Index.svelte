@@ -45,7 +45,7 @@
 
     <div class="content">
         <p>Bumag (whose real name is Anya Bumagin) says that her audience has noticed the peculiar way she speaks in her videos.</p>
-        <p>But Bumagin is not the only one that speaks this way.</p>
+        <p>But Bumagin is not the only one who speaks this way.</p>
         <p>Here's a video of another Amazon influencer, <a href="https://www.tiktok.com/@sam.shan.shops?lang=en">sam.shan.shops</a>. Pay close attention to what is happening at the parts of the audio marked by the circles.</p>
     </div>  
     <TiktokSample 
@@ -76,7 +76,7 @@
 
         <!-- {@html `<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@beccajacksonstudio/video/7348952911289814302" data-video-id="7348952911289814302" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@beccajacksonstudio" href="https://www.tiktok.com/@beccajacksonstudio?refer=embed">@beccajacksonstudio</a> There are many misconceptions about vocal fry.  It’s one of my favorite subjects to get deep into.   Here it is in less than a minute so the next time your choir director or acting teacher mentions it you know what they are talking about! Gotta know the basics before you dive in!  <a title="musicaltheatre" target="_blank" href="https://www.tiktok.com/tag/musicaltheatre?refer=embed">#musicaltheatre</a> <a title="actingteacher" target="_blank" href="https://www.tiktok.com/tag/actingteacher?refer=embed">#actingteacher</a> <a title="voiceteacher" target="_blank" href="https://www.tiktok.com/tag/voiceteacher?refer=embed">#voiceteacher</a> <a title="voicecoach" target="_blank" href="https://www.tiktok.com/tag/voicecoach?refer=embed">#voicecoach</a> <a title="actingtips" target="_blank" href="https://www.tiktok.com/tag/actingtips?refer=embed">#actingtips</a> <a title="education" target="_blank" href="https://www.tiktok.com/tag/education?refer=embed">#education</a> <a title="onlinecoach" target="_blank" href="https://www.tiktok.com/tag/onlinecoach?refer=embed">#onlinecoach</a> <a title="actinglessons" target="_blank" href="https://www.tiktok.com/tag/actinglessons?refer=embed">#actinglessons</a> <a title="singingteacher" target="_blank" href="https://www.tiktok.com/tag/singingteacher?refer=embed">#singingteacher</a> <a title="voicelessons" target="_blank" href="https://www.tiktok.com/tag/voicelessons?refer=embed">#voicelessons</a> <a title="singing" target="_blank" href="https://www.tiktok.com/tag/singing?refer=embed">#singing</a> <a title="singingtips" target="_blank" href="https://www.tiktok.com/tag/singingtips?refer=embed">#singingtips</a> <a title="vocalcoach" target="_blank" href="https://www.tiktok.com/tag/vocalcoach?refer=embed">#vocalcoach</a> <a title="fyp" target="_blank" href="https://www.tiktok.com/tag/fyp?refer=embed">#fyp</a> <a title="careeradvice" target="_blank" href="https://www.tiktok.com/tag/careeradvice?refer=embed">#careeradvice</a> <a target="_blank" title="♬ original sound - Becca Jackson Studio" href="https://www.tiktok.com/music/original-sound-7348952951752280863?refer=embed">♬ original sound - Becca Jackson Studio</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>`} -->
 
-        <video src="/media/video/tiktok_1.mp4" autoplay muted loop controls style="max-height:400px;"></video>
+        <video src={base + "/media/video/tiktok_1.mp4"} autoplay muted loop controls style="max-height:400px;"></video>
 
         <p><span class="bold">Upspeak</span> is when you end sentences the same way you end questions.</p>
 
@@ -92,7 +92,7 @@
 
         } -->
 
-        <video src="/media/video/tiktok_2.mp4" autoplay muted loop controls style="max-height:400px;"></video>
+        <video src={base + "/media/video/tiktok_2.mp4"} autoplay muted loop controls style="max-height:400px;"></video>
 
         <div class="blockquote">
             <p>“First, the rising tones makes it sound like the video is always unfinished, so people have to keep watching because they can tell that something is coming next. </p>
@@ -151,16 +151,16 @@
     </div>
 
     <div class="content">
-        <p>Rising intonations aren't just useful for convicing people.</p>
+        <p>Rising intonations aren't just useful for convincing people.</p>
         <p><a href="https://www.sciencedirect.com/science/article/pii/S037821661730663X">In a 2018 paper by Burdin and Tyler,</a> they found that this rise in intonation tends to be found when people list things off as well.</p>
         <p>In their study, they found that rises were associated with feelings of helpfulness, niceness, and friendliness towards the speaker. </p>
         <p>The speaker also comes across as more prepared about what they are saying, and the speaker that used “rises” was heard as “informing” and “instructive”.</p>
         <p class="subhead" style="font-size: 2em;font-weight: bold;font-family:'Rasa', 'serif';">Trends & Emulation</p>
-        <p>Bumagin said that the her intonations are just part of the natural way she speaks "to emphasize certain things".</p>
-        <p>In my conversation her, I could hear those same intonations. However, they sounded more organic because it was peppered through sentences of varying pitch as opposed to grouped together, sentence after sentence.</p>
+        <p>Bumagin said that her intonations are just part of the natural way she speaks "to emphasize certain things".</p>
+        <p>In my conversation with her, I could hear those same intonations. However, they sounded more organic because they were peppered throughout sentences of varying pitch as opposed to grouped together, sentence after sentence.</p>
         <p>Her manager, Andreea Ozturk, who was in the call with us, said that much like trends, these accents could have started as something fun that ends up being copied or emulated by other people.</p>
         <p>"Let's say tomorrow, Anya creates a video...in a crazy, totally different way," said Ozturk. "Other creators may copy her [the way she did it]."</p> 
-        <p>When I asked Bumagin about how she think she's different from other Amazon influencers, Bumagin said that despite everything we've talked about, she feels that everyone has a different voice.</p>
+        <p>When I asked Bumagin about how she thinks she's different from other Amazon influencers, Bumagin said that despite everything we've talked about, she feels that everyone has a different voice.</p>
         <p>"Everyone has a different voice and a different way of speaking," said Bumagin. "Some followers might relate to one creator more [that the other because of] the way they speak as well."</p>
     </div>
 

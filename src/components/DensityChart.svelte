@@ -47,7 +47,7 @@
 
 	let currentStep;
 
-	let steps = ['When looking at 100 videos across four genres of TikToks: Amazon Finds, Book Recommendations, Get Ready With Me, and Storytime...',
+	let steps = ['When looking at more than 300 videos across four genres of TikToks: Amazon Finds, Book Recommendations, Get Ready With Me, and Storytime...',
         '...the number of intonations in Amazon Finds TikToks were statistically significantly more than other genres.', 
         'Typically, Amazon finds TikToks had a median of about 15 intonations per 15 seconds.']
 </script>

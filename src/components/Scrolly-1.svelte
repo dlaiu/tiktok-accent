@@ -5,7 +5,7 @@
 
     let steps = [
         // "She's not the only one that sounds this way.",
-        "When we analysed 1,500 videos from Amazon content creators, all of them had the distinctive speech pattern.",
+        "When we analyzed 1,500 videos from Amazon content creators, all of them had the distinctive speech pattern.",
         "Some, like myself, find this speech pattern weirdly unnatural.",
         "Adam Aleksic — a content creator that makes videos about linguistics, might call it the “TikTok accent.”"
     ]

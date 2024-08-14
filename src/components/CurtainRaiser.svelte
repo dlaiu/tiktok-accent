@@ -162,15 +162,20 @@
 				 <WaveFormCircles data={anyaData} currentTime={anyaTime} fillColor="black" curtain={true} />
 			</div>
 			<hr width="80%" />
-			{#if played}
 			<div class="hearIt" transition:fly={{y: 20, duration: 600, opacity: 0}}>
 				<p class="name">You:</p>
 				<AudioPlayer src={audioUrl} curtainRaiser=True on:timeUpdate={handleTimeUpdate} />
-				<!-- <MidPointCharts data={recordData} fillColor="black" currentTime={currentTime}/> -->
 				<WaveFormCircles data={recordData} currentTime={currentTime} fillColor="black" curtain={true}/>
 			</div>
 			<p class="content">Notice anything different? As a hint, we've highlighted what makes Anya's voice different.</p>
-			{/if}
+			<!-- {#if played}
+			<div class="hearIt" transition:fly={{y: 20, duration: 600, opacity: 0}}>
+				<p class="name">You:</p>
+				<AudioPlayer src={audioUrl} curtainRaiser=True on:timeUpdate={handleTimeUpdate} />
+				<WaveFormCircles data={recordData} currentTime={currentTime} fillColor="black" curtain={true}/>
+			</div>
+			<p class="content">Notice anything different? As a hint, we've highlighted what makes Anya's voice different.</p>
+			{/if} -->
 
 		</div>
 	{/if}

@@ -1,5 +1,5 @@
 <script>
-	export let title = "Title TK";
+	export let title = "Why are people talking differently online?";
 	export let description = "Description TK";
 	//export let url = "https://pudding.cool";
 	// export let keywords = "";
@@ -8,8 +8,8 @@
 
 <svelte:head>
 	<title>{title}</title>
-	<meta name="description" content={description} />
-	<meta name="author" content="The Pudding" />
+	<!-- <meta name="description" content={description} />
+	<meta name="author" content="The Pudding" /> -->
 	<!-- <meta name="news_keywords" content={keywords} /> -->
 
 	<!-- <meta property="og:title" content={title} />
