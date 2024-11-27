@@ -11,6 +11,7 @@
 	import { tick } from 'svelte';
 
 	import anyaData from '../data/7007951477993966853_trimmed_pitch-values.json';
+	import darrylData from '../data/darryl_pitch-values.json'
 
 	import { createEventDispatcher } from 'svelte';
 	import WaveFormCircles from './WaveFormCircles.svelte';
@@ -28,14 +29,22 @@
 	let clicked = false;
 	let disabled = false; // New state for disabling the button
 
+	$: load = false;
+
 	let comparisonSection;
 	let currentTime = 0; // Track the current time of the audio
 	let anyaTime = 0; // Current time for Anya's audio
 
 	// Call this function when CurtainRaiser is done
 	function finishCurtainRaiser() {
-        dispatch('finished');
+        // dispatch('finished');
 		// console.log("triggered")
+
+		dispatch('finished', {
+	        audioUrl: audioUrl,
+    	    recordData: recordData
+   		});
+
     }
 
 	async function startRecording() {
@@ -49,6 +58,8 @@
 		// document.getElementById('recordButton').innerText = 'Stop Recording';
 		recording = true;
 		clicked = true;
+
+		load = true;
 	}
 
 	async function stopRecording() {
@@ -74,8 +85,8 @@
 			// 			audioUrl
 			// 		};
 			// console.log(recordData);
-			console.log(audioUrl);
-			console.log(audioBlob);
+			// console.log(audioUrl);
+			// console.log(audioBlob);
 		});
 
 		// document.getElementById('recordButton').innerText = 'Record Audio';
@@ -119,7 +130,7 @@
 		if (comparisonSection) {
 			comparisonSection.scrollIntoView({ behavior: 'smooth' });
 		}
-		console.log('Scrolling to comparison');
+		// console.log('Scrolling to comparison');
 		finishCurtainRaiser();
 	}
 
@@ -129,6 +140,7 @@
 		console.log(audio);
 
 	}
+	
 
 	function handleTimeUpdate(event) {
 		currentTime = event.detail.currentTime; // Update current time
@@ -163,7 +175,7 @@
 		<p class="caption">"This is a breadmaker that does all the work for you."</p>
 	</div>
 
-	{#if audioUrl}
+	<!-- {#if load} -->
 		<div class="comparison" bind:this={comparisonSection} transition:fly={{ y: 20, duration: 300, opacity: 0 }}>
 			<p class="content">Now let's hear how Amazon influencer <a href="https://www.tiktok.com/@anya.bumag?lang=en">anya.bumag</a> sounds reading it.</p>
 
@@ -174,11 +186,18 @@
 				 <WaveFormCircles data={anyaData} currentTime={anyaTime} fillColor="black" curtain={true} />
 			</div>
 			<hr width="80%" />
+			<p class="content">This is me saying the same thing.</p>
 			<div class="hearIt" transition:fly={{y: 20, duration: 600, opacity: 0}}>
+				<p class="name">Darryl:</p>
+				<AudioPlayer src='/media/audio/darryl-curtain-audio.mp3' curtainRaiser=True on:timeUpdate={handleTimeUpdate} />
+				<WaveFormCircles data={darrylData} currentTime={currentTime} fillColor="black" curtain={true}/>
+			</div>
+
+			<!-- <div class="hearIt" transition:fly={{y: 20, duration: 600, opacity: 0}}>
 				<p class="name">You:</p>
 				<AudioPlayer src={audioUrl} curtainRaiser=True on:timeUpdate={handleTimeUpdate} />
 				<WaveFormCircles data={recordData} currentTime={currentTime} fillColor="black" curtain={true}/>
-			</div>
+			</div> -->
 			<p class="content">Notice anything different? As a hint, we've highlighted what makes Anya's voice different.</p>
 			<!-- {#if played}
 			<div class="hearIt" transition:fly={{y: 20, duration: 600, opacity: 0}}>
@@ -190,7 +209,7 @@
 			{/if} -->
 
 		</div>
-	{/if}
+	<!-- {/if} -->
 
 	<!-- {#if recordData}
 		<div class="waveform-close-reading">

@@ -1,4 +1,8 @@
 <script>
+    import '@fontsource-variable/inter-tight';
+    import '@fontsource-variable/rasa';
+
+
     import { base } from '$app/paths';
 
 	import WaveForm from "./WaveForm.svelte";
@@ -9,6 +13,14 @@
 	import WaveFormAnnotated from "./WaveFormAnnotated.svelte";
 	import DensityChart from "./DensityChart.svelte";
     import WaveFormAnnotatedCircles from "./WaveFormAnnotatedCircles.svelte";
+    import WaveFormCircles from "./WaveFormCircles.svelte";
+
+    import { fly } from 'svelte/transition';
+
+    import anyaData from '../data/7007951477993966853_trimmed_pitch-values.json';
+
+    let currentTime = 0; // Track the current time of the audio
+    let anyaTime = 0; // Current time for Anya's audio
 
     import transcript from '../data/7366018710248672517_transcription.json'
 	import WaveFormPlayer from "./WaveFormPlayer.svelte";
@@ -18,9 +30,25 @@
     
     let curtainRaiserDone = false;
 
-    function handleCurtainRaiserFinished() {
-        curtainRaiserDone = true;
-        console.log("curtain raiser is done.")
+    let audioUrl = null;
+    let recordData = null;
+    let dataPassed = false;
+
+    function handleCurtainRaiserFinished(event) {
+        // curtainRaiserDone = true;
+        // console.log("curtain raiser is done.")
+        // const { audioUrl, recordData } = event.detail;
+        const { audioUrl: url, recordData: data } = event.detail;
+        audioUrl = url;
+        recordData = data;
+
+
+        console.log(audioUrl);
+        console.log(recordData);
+
+        if (audioUrl && recordData) {
+            dataPassed = true;
+        }
     }
     
     let currentTimeAnnotated = 0;
@@ -28,6 +56,16 @@
     function handleTimeUpdate(event) {
         currentTimeAnnotated = event.detail.currentTime;
     }
+
+    function handleYourTimeUpdate(event) {
+		currentTime = event.detail.currentTime; // Update current time
+	}
+
+	function handleAnyaTimeUpdate(event) {
+    	anyaTime = event.detail.currentTime;
+  	}
+
+    let played = false;
 
 </script>
 <body>
@@ -37,7 +75,7 @@
 
 
     
-    {#if curtainRaiserDone}
+    <!-- {#if curtainRaiserDone} -->
     <div class="hero">
         <p class="headline">Why are people talking differently online?</p>
         <p class="byline">By Darryl Laiu</p>
@@ -64,7 +102,7 @@
 
     <div class="content">
 
-        <p class="subhead" style="font-size: 2em;font-weight: bold;font-family:'Rasa', 'serif';">Attention and engagement</p>
+        <p class="subhead" style="font-size: 2em;font-weight: bold;font-family:'Rasa Variable', serif;;">Attention and engagement</p>
 
         <p>Aleksic said in an explainer of the accent that it "sounds like that because it's designed to manipulate you."</p>
        
@@ -106,13 +144,13 @@
 
         <p>However, an analysis on the frequency of uptalk in a video and the number of views a video has showed that there wasn't a significant relationship between the two.</p>
 
-        <p class="subhead" style="font-size: 2em;font-weight: bold;font-family:'Rasa', 'serif';">Emphasis</p>
+        <p class="subhead" style="font-size: 2em;font-weight: bold;font-family:'Rasa Variable', serif;">Emphasis</p>
 
         <p>Bumagin says that she does intentionally speak in a lower voice. However, she said that she doesn't uptalk intentionally.</p>
 
         <p>"I think it's natural...in that context to emphasize certain things."</p>
 
-        <p class="subhead" style="font-size: 2em;font-weight: bold;font-family:'Rasa', 'serif';">Uptalk</p>
+        <p class="subhead" style="font-size: 2em;font-weight: bold;font-family:'Rasa Variable', serif;">Uptalk</p>
 
         <p>For a moment, let's look at <span class="bold">upspeak.</span></p>
 
@@ -155,7 +193,7 @@
         <p><a href="https://www.sciencedirect.com/science/article/pii/S037821661730663X">In a 2018 paper by Burdin and Tyler,</a> they found that this rise in intonation tends to be found when people list things off as well.</p>
         <p>In their study, they found that rises were associated with feelings of helpfulness, niceness, and friendliness towards the speaker. </p>
         <p>The speaker also comes across as more prepared about what they are saying, and the speaker that used “rises” was heard as “informing” and “instructive”.</p>
-        <p class="subhead" style="font-size: 2em;font-weight: bold;font-family:'Rasa', 'serif';">Trends & Emulation</p>
+        <p class="subhead" style="font-size: 2em;font-weight: bold;font-family:'Rasa Variable', serif;">Trends & Emulation</p>
 
         <p>Bumagin said that her intonations are just part of the natural way she speaks "to emphasize certain things".</p>
         <p>In my conversation with her, I could hear those same intonations. However, they didn’t sound out of place because they were peppered throughout sentences of varying pitch as opposed to grouped together, sentence after sentence.</p>
@@ -165,8 +203,29 @@
         <p>"Everyone has a different voice and a different way of speaking," said Bumagin. "Some followers might relate to one creator more [that the other because of] the way they speak as well."</p>
     </div>
 
-    <Footer />
+    {#if dataPassed}
+
+    <div class="content">
+
+        <p class="subhead" style="font-size: 2em;font-weight: bold;font-family:'Rasa Variable', serif;">And if you want to hear how what you recorded compares with Anya:</p>
+    
+        <div class="hearIt">
+            <p class="name">Anya:</p>
+            <AudioPlayer src="/media/audio/7007951477993966853_trimmed.mp3" on:timeUpdate={handleAnyaTimeUpdate} on:play={() => played = true}/>
+             <WaveFormCircles data={anyaData} currentTime={anyaTime} fillColor="black" curtain={true} />
+        </div>
+        <hr width="80%" />
+        <div class="hearIt" transition:fly={{y: 20, duration: 600, opacity: 0}}>
+            <p class="name">You:</p>
+            <AudioPlayer src={audioUrl} curtainRaiser=True on:timeUpdate={handleYourTimeUpdate} />
+            <WaveFormCircles data={recordData} currentTime={currentTime} fillColor="black" curtain={true}/>
+        </div>
+    </div>
+
     {/if}
+
+    <Footer />
+    <!-- {/if} -->
 
 </body>
 
@@ -175,11 +234,12 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        font-family: 'Inter-Tight', sans-serif;
+        font-family: 'Inter Tight Variable', sans-serif;
         font-style: normal;
         /* font-size: 1em; */
         /* line-height: 1.5; */
-        margin: 0;
+        max-width: 100vw;
+        /* margin: auto 2em; */
         padding: 0;
         background-color: #fdecde;
     }
@@ -210,13 +270,15 @@
     .headline {
         font-size: 5em;
         font-weight: bold;
-        font-family: 'Rasa', serif;
+        font-family: 'Rasa Variable', serif;
 
     }
 
     .byline {
         font-size: 1.5em;
-        font-family: 'Rasa', serif;
+        font-family: 'Rasa Variable', serif;
+        margin: 1.5em;
+    
     }
 
     .content p {
@@ -307,4 +369,11 @@
         padding: 2px;
         border-radius: 5px;
     }
+
+    .hearIt {
+		display: flex;
+		max-width: 60vw;
+		justify-content: center;
+		align-items: center;
+	}
 </style>

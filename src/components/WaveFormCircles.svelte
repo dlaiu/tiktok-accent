@@ -56,13 +56,13 @@
             }
         });
 
-        console.log(midpoints);
+        // console.log(midpoints);
     }
 
     onMount(() => {
         findUptalkMidpoints(data);
         if (curtain === true) {
-            console.log(curtain);
+            // console.log(curtain);
             svg_height = 100;
         }
     });
