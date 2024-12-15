@@ -189,7 +189,7 @@
 			<p class="content">This is me saying the same thing.</p>
 			<div class="hearIt" transition:fly={{y: 20, duration: 600, opacity: 0}}>
 				<p class="name">Darryl:</p>
-				<AudioPlayer src='/media/audio/darryl-curtain-audio.mp3' curtainRaiser=True on:timeUpdate={handleTimeUpdate} />
+				<AudioPlayer src="/media/audio/darryl-curtain-audio.mp3" on:timeUpdate={handleTimeUpdate} />
 				<WaveFormCircles data={darrylData} currentTime={currentTime} fillColor="black" curtain={true}/>
 			</div>
 

@@ -7,7 +7,7 @@
         // "She's not the only one that sounds this way.",
         "When we analyzed 1,500 videos from Amazon content creators, all of them had the distinctive speech pattern.",
         "Some, like myself, find this speech pattern weirdly unnatural.",
-        "Adam Aleksic — a content creator that makes videos about linguistics, might call it the “TikTok accent.”"
+        "Adam Aleksic — a content creator who makes videos about linguistics, might call it the “TikTok accent.”"
     ]
 </script>
 
